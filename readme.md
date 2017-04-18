@@ -1,17 +1,14 @@
 # Code challenge easynvest
 
-# Introduction
+# Description
 
-# Additional information
+This document is a high level description of what is the challenge, what is the
+data set, how was the approach and the results.
 
-## Tools
-* Vim
-* python
-```
-python3 --version
-Python 3.6.1
-```
-* pthon modules:
-TODO
+# The challenge
 
-## Software version
+# The data set
+
+# Approach
+
+# Results
