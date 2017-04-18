@@ -1,0 +1,15 @@
+"""Set variables for code challenge by Easynvest."""
+import os
+
+DATA_PATH = '../data'
+DADOS_PATH = os.path.join(
+    DATA_PATH,
+    'dataset_code_challenge_data_scientist_dados.csv')
+DEPARA_PATH = os.path.join(
+    DATA_PATH,
+    'dataset_code_challenge_data_scientist_depara.csv')
+
+OUTPUT_PATH = '../output/'
+EXPL_ANALYSIS_PATH = os.path.join(
+    OUTPUT_PATH,
+    'exploratory_analyses')
