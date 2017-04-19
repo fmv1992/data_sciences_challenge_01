@@ -21,12 +21,6 @@ def describe_clusters(dataframe):
     print_feature('N per cluster')
     print(gb.count()['id'])
 
-    title = 'Cluster mean of variables'
-    group = gb.mean()
-    plot_cluster_analysis(group, gb.std(), title)
-    print_feature(title)
-    print(group)
-
     print_feature('Cluster standard deviation of variables')
     cluster_std = gb.std()
     all_std = dataframe.std()
@@ -34,6 +28,16 @@ def describe_clusters(dataframe):
     all_std.name = 'all'
     cluster_std = cluster_std.append(all_std.T).drop('cluster', axis=1)
     print(cluster_std)
+
+    title = 'Cluster mean of variables'
+    cluster_mean = gb.mean()
+    all_mean = dataframe.mean()
+    all_mean.loc['cluster'] = 'all'
+    all_mean.name = 'all'
+    cluster_mean = cluster_mean.append(all_mean.T).drop('cluster', axis=1)
+    plot_cluster_analysis(cluster_mean, cluster_std, title)
+    print_feature(title)
+    print(cluster_mean)
 
     print_feature('Normalized cluster standard deviation of variables')
     print(cluster_std/cluster_std.max())
@@ -54,7 +58,7 @@ def plot_cluster_analysis(dataframe, error, title):
         filename = (
             'cluster_analysis' + '_'
             + title.lower().replace(' ', '_') + '_'
-            + column.lower().replace(' ', '_') + '_' + '.png')
+            + column.lower().replace(' ', '_') + '.png')
         fig.savefig(
             os.path.join(control.CLUSTERING_PATH, filename),
             dpi=300)

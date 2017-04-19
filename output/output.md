@@ -8,11 +8,11 @@ This is the complete document of the challenge.
 
 # The data set
 
+* TODO: include total income/total value in dicusssion. XXX
 * TODO: comment on data set: non nulls
 * TODO: comment on geo_referencia
 
 # Approach
-
 
 # Results
 
@@ -60,11 +60,75 @@ concentrated on cluster 2). Using the same argumentation the cluster that is
 best defined is cluster 1 because of the high incidence of data points at near
 .75 silhouette value.
 
-## Clustering
+## Cluster interpretation
+
+For cluster interpretation two resources are available:
+
+1. Tables output to stdout during program execution.
+1. Plots.
+
+From a general standpoint clusters should have low intra-cluster variance and
+high inter-cluster variance for each variable.
+
+### Cluster 0
+
+*Distinctive features:*
+
+1. Has the most concentration of other marital status (that is, it is neither
+   married nor single).
+1. Has the highest age mean of all groups even though there is a high
+   dispersion both intra and inter cluster for this variable.
+
+### Cluster 1
+
+*Distinctive features:*
+
+1. Has the most concentration of single persons ('solteiro').
+1. It is solely composed of male individuals (absence of 'genenro_f'). This
+   also happens to cluster 2 and cluster 3.
+1. Has the most concentration of profile D ('perfil_d'). Also contains a lot of
+   profile A individuals.
+1. Has the most concentration young people.
+
+### Cluster 2
+
+*Distinctive features:*
+
+1. Has the highest averages for 'valor_02', 'valor_03' and 'valor_04'.
+   In respect to these 3 variables all the other groups have much lower
+   averages.
+1. Includes almost solely profile B people.
+1. Contains almost solely males.
+
+### Cluster 3
+
+*Distinctive features:*
+
+1. It is the group with the highest proportion of married individuals
+   ('estado_civil_casado').
+1. The cluster is entirely comprised of male individuals.
+1. The cluster contains only individuals from profile A and profile D.
+
+### Cluster 4
+
+*Distinctive features:*
+
+1. a
+1. b
+1. c
+
+### Cluster 5
+
+*Distinctive features:*
+
+1. a
+1. b
+1. c
+
 
 # Summary
 
-# Additional information
+# Additional information & Reproducibility
 
 ## Tools
 * Vim
@@ -77,3 +141,13 @@ Python 3.6.1
 TODO
 
 ## Software version
+
+TODO
+
+# Other remarks
+
+* Comment on the data set 
+
+# Next steps
+
+* The 

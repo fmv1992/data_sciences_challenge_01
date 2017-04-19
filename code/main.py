@@ -30,6 +30,9 @@ def main():
                              df_dados.columns):
         df_dados[obj_column] = df_dados[obj_column].str.lower().astype('category')
 
+    # TODO: add a total value (possibly total income).
+    # XXX
+
     # Round to day as hour of birth may be considered unnecessary.
     df_dados['data_nascimento_int'] = df_dados['data_nascimento'].astype('int64')
     # Create an age variable
