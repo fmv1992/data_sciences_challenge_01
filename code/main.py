@@ -4,9 +4,10 @@ import numpy as np
 
 from data_utilities import pandas_utilities as pu
 
+import clustering
 import control
 import exploratory_analysis
-import clustering
+import interpretation
 
 
 def main():
@@ -83,7 +84,18 @@ def main():
     df_clust_scaled = clustering.preprocess_data(df_clust)
 
     # Select the number of clusters.
-    n_clust = clustering.get_n_clusters(df_clust_scaled)
+    all_cluster_labels = clustering.get_n_clusters(df_clust_scaled)
+    # After carefull consideration I have decided that the adequate number of
+    # clusters in this situations is 6.
+    n_clusters = 6
+    cluster_labels = all_cluster_labels[n_clusters]
+    del all_cluster_labels
+
+
+    # Interpret cluster data.
+    df_dados['cluster'] = cluster_labels
+    del cluster_labels
+    interpretation.describe_clusters(df_dados)
 
     return None
 
