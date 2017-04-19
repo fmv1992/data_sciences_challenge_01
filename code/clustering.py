@@ -104,3 +104,4 @@ def get_n_clusters(dataframe, max_clusters=10):
 
 def clusterize_dataframe(dataframe):
     """Create clusters from input dataframe."""
+    pass
