@@ -53,11 +53,11 @@ interpretations later on the data analysis and render some conclusions useless.
 
 As stated in the challenge description my work should:
 
-1. Group users, finding well defined groups with common characteristics.
+1. *Group users, finding well defined groups with common characteristics.*
     * In order to do that I have clustered the data set using the K-Means
       clustering algorithm.
 
-1. Justify the chosen clustering algorithm.
+1. **Justify the chosen clustering algorithm.**
     * This algorithm is one of the most commonly used algorithm in Data
       Sciences. As such one can easily find support, implementations,
       discussions and suggestions on various references. Such vast amount of
@@ -71,17 +71,17 @@ As stated in the challenge description my work should:
       of clients. In such cases one does not want to invest those in a cluster
       just to find out that it aggregates to just 1% of their clientele.
 
-1. Present metrics of perfomance for the chosen algorithm
+1. **Present metrics of perfomance for the chosen algorithm.**
     * In this case the silhouette analysis was performed to assess the
       effectivenss of the clustering algorithm. Also the intra-group and
       inter-group standard deviation and means were taken in consideration to
       interpret the results of this clustering algorithm.
 
-1. Discuss the metrics of performance to assess the clusters.
+1. **Discuss the metrics of performance to assess the clusters.**
     * See [discussion of the clustering](#clustering) for a complete assessment
       of the clustering algorithm.
 
-1. Explain the results.
+1. **Explain the results.**
     * See the [results](#results) and [summary](#summary) sections for a
       precise answer to this question.
 
@@ -127,16 +127,18 @@ far away from other clusters. Another fact that indicates that 6 is a good
 number for clusters is that in this case just a few data points show a
 silhouette smaller than zero. In other words, just a few data points are
 incorrectly labeled in their cluster (those data points are unfrequent and are
-concentrated on cluster 2). Using the same argumentation the cluster that is
-best defined is cluster 1 because of the high incidence of data points at near
-.75 silhouette value.
+concentrated on cluster 2) ([see below](#silh6)). Using the same argumentation the
+cluster that is best defined is cluster 1 because of the high incidence of data
+points at near .75 silhouette value.
+![xxx](../output/clustering/silhouette_distribution_for_n=6_clusters.png){#silh6}
+See [images for silhouette](#all_silh) for all images.
 
 ## Cluster interpretation
 
 For cluster interpretation two resources are available:
 
-1. Tables output to stdout during program execution.
-1. Plots.
+1. [Tables](#stdout) output to stdout during program execution.
+1. [Plots](#all_plots).
 
 From a general standpoint clusters should have low intra-cluster variance and
 high inter-cluster variance for each variable.
@@ -147,6 +149,7 @@ high inter-cluster variance for each variable.
 
 1. Has the most concentration of other marital status (that is, it is neither
    married nor single).
+![cluster0](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_outro.png)
 1. Has the highest age mean of all groups even though there is a high
    dispersion both intra and inter cluster for this variable.
 
@@ -155,6 +158,7 @@ high inter-cluster variance for each variable.
 *Distinctive features:*
 
 1. Has the most concentration of single persons ('solteiro').
+![cluster1](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_solteiro.png)
 1. It is solely composed of male individuals (absence of 'genenro_f'). This
    also happens to cluster 2 and cluster 3.
 1. Has the most concentration of profile D ('perfil_d'). Also contains a lot of
@@ -168,6 +172,7 @@ high inter-cluster variance for each variable.
 1. Has the highest averages for 'valor_02', 'valor_03' and 'valor_04'.
    In respect to these 3 variables all the other groups have much lower
    averages.
+![cluster2](../output/clustering/cluster_analysis_cluster_mean_of_variables_valor_02.png)
 1. Includes almost solely profile B people.
 1. Contains almost solely males.
 
@@ -177,6 +182,7 @@ high inter-cluster variance for each variable.
 
 1. It is the group with the highest proportion of married individuals
    ('estado_civil_casado').
+![cluster3](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_casado.png)
 1. The cluster is entirely comprised of male individuals.
 1. The cluster contains only individuals from profile A and profile D.
 
@@ -199,26 +205,92 @@ high inter-cluster variance for each variable.
 
 # Summary {#summary}
 
+The clusterization was conducted properly and yielded significant results. This
+is evidenced by:
+
+* A satisfactory value of silhouette (XXX)
+* Some very sharp separations, some of which are coupled and yield easily
+  interpretable results:
+    * a (coupled)
+    * b (coupled)
+    * c (single)
+    * d (single)
+
+* A reasonable amount of clusters, facilitating the communication and
+  interpretation of the results (one of the strenghts of the algorithm)
+
+A quick summary of each cluster's characteristics are:
+
+* Cluster 0: (XXX one liner XXX)
+* Cluster 1: (XXX one liner XXX)
+* Cluster 2: (XXX one liner XXX)
+* Cluster 3: (XXX one liner XXX)
+* Cluster 4: (XXX one liner XXX)
+* Cluster 5: (XXX one liner XXX)
+
 # Additional information & Reproducibility
 
 ## Tools
 * Vim
+    ```
+    vim --version
+    VIM - Vi IMproved 8.0 (2016 Sep 12, compiled Apr  4 2017 13:41:19)
+    Included patches: 1-542
+    Modified by <cygwin@cygwin.com>
+    Compiled by <cygwin@cygwin.com>
+    Huge version without GUI.
+    ```
 * python
 ```
 python3 --version
 Python 3.6.1
 ```
 * python modules:
-    * mod1
-    * mod1
-    * mod1
+    ```
+    data-utilities==1.2.6
+    matplotlib==2.0.0
+    numpy==1.12.1
+    pandas==0.19.2
+    scikit-learn==0.18.1
+    scipy==0.19.0
+    seaborn==0.7.1
+    ```
 * pandoc
-TODO
+    ```
+    pandoc --version
+    pandoc.exe 1.19.2.1
+    Compiled with pandoc-types 1.17.0.4, texmath 0.9, skylighting 0.1.1.4
+    Default user data directory: C:\Users\e061568\AppData\Roaming\pandoc
+    Copyright (C) 2006-2016 John MacFarlane
+    Web:  http://pandoc.org
+    This is free software; see the source for copying conditions.
+    There is no warranty, not even for merchantability or fitness
+    for a particular purpose.
+    ```
+XXX
 
 # Other remarks
 
-* Comment on the data set ; suggest improvements.
+* Comment on the data set ; suggest improvements. XXX
 
 # Next steps
 
-* The 
+* XXX
+
+# All output from python code
+
+## All the images {#all_plots}
+
+### Silhouette {#all_silh}
+
+XXX
+
+### Clusters {#all_silh}
+
+Notice that the error bars represented here are +- 1 standard deviation.
+
+XXX
+
+## Code output (stdout) {#stdout}
+
+XXX 
