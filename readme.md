@@ -1,6 +1,7 @@
 # Code challenge easynvest
 
 ***(work in progress)***
+***(see results section below for indication of partial results)***
 
 # Description
 
@@ -9,11 +10,20 @@ data set, how was the approach and the results.
 
 # The challenge
 
+***(work in progress)***
+***(see results section below for indication of partial results)***
+
 # The data set
+
+***(work in progress)***
+***(see results section below for indication of partial results)***
 
 # Approach
 
-# Results ***(work in progress)***
+***(work in progress)***
+***(see results section below for indication of partial results)***
+
+# Results
 
 A partial result is available on `output/partial_results/*`.
 
@@ -28,3 +38,9 @@ pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
 ```
 
 I recommend the html version which is the one I've been using to get feedback.
+
+**Do not read the markdown version as it is a pandoc markdown syntax and thus
+not properly rendered by github.**
+
+For your convenience the website <http://htmlpreview.github.io/> can render
+html files on github.

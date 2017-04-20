@@ -1,5 +1,7 @@
 # Code challenge easynvest
 
+***(work in progress)***
+
 # Description
 
 This is the complete document of the challenge proposed by Easynvest.
@@ -19,7 +21,7 @@ The complete description of the challenge may be found in the file
 
 The data set received was in the form of an Excel spreadsheet with two tabs.
 The first tab contained 4973 entries (N=4973), one unique ID and 10
-characteristics.  
+characteristics (11 columns total).  
 The second tab has entries which are not described elsewhere. The lack of a
 formal description casts unecessary uncertainty into the data at hand.  Lack of
 proper definition is a discouraged practice in data creation (e.g.: absence of
@@ -30,8 +32,9 @@ A remarkable fact of this data set is that it does not contain any null values.
 Such high quality data sets are rare to find and may indicate that its source
 is very thoughtful of its data management.
 
-A final remark is that the characteristics' names should not be considered self
-explanatory. A codebook is often use to describe published data.  
+A final remark is that the characteristics' names (column names) should not be
+considered self explanatory. A codebook is often use to describe published
+data.  
 To illustrate the critique above consider the variable 'VALOR_01' (value_01;
 there are 4 of these variables).
 To what value does it refer to? Is it the amount already invested in the
@@ -40,15 +43,17 @@ income? Is it profit? If it is income, is it yearly or monthly?
 Another illustration is the 'GEO_REFERENCIA' (georeference) variable. It has
 values ranging from 10 to 999 but it is not explained elsewhere. Usual
 geolocation information are comprised of x and y coordinates or other better
-known formats.  
+known formats. Also, it cannot refer to Brazilian municipalities because there
+exists ~5500 of them.  
 Consequently this variable has been neglected in the present analysis.
 
 As one can see, this seemingly unimportant differences may yield different
 interpretations later on the data analysis and render some conclusions useless
 or even worse: wrong.
 
-
+~~~~~
 * XXX TODO: include total income/total value in dicusssion. XXX
+~~~~~
 
 # Approach
 
@@ -61,25 +66,32 @@ As stated in the challenge description my work should:
 1. **Justify the chosen clustering algorithm.**
     * This algorithm is one of the most commonly used algorithm in Data
       Sciences. As such one can easily find support, implementations,
-      discussions and suggestions on various references. Such vast amount of
-      information is not something to be neglected.  
-      It also allows the specification of the number of clusters to be found.
-      This is seen as drawback sometimes. Yet I think that it can be overcome
-      with successively running the algorithm with a different cluster number.  
-      Also it tends to yield clusters with similar size. This may be a desired
-      characteristic in a business setting for example, where investment of
-      resources (time and capital) may be applied to a cluster of clients.  In
-      such cases one does not want to invest those in a cluster just to find
-      out that it aggregates to just a few individuals of their clientele.
+      discussions and suggestions on various references. **Such vast amount of
+      information is not something to be neglected.**  
+      The algorithm also allows the specification of the number of clusters to
+      be found.  This is seen as drawback according to some sources. Yet
+      I think that it can be overcome with successively running the algorithm
+      with a different cluster number. Specifying the number of clusters also
+      impedes the algorithm to come up with a number of clusters which may be
+      uninterpretable (too few, e. g. 2 or too many 10+).  
+      The algorithm tends to yield clusters with similar size. This may be
+      a desired characteristic in a business setting for example, where
+      investment of resources (time and capital) may be applied to a cluster of
+      clients.  In such cases one does not want to invest those in a cluster
+      just to find out that it aggregates to just a few individuals of their
+      clientele.  
+      XXX TODO: discuss the random initialization of the algorithm; it may
+      yield really different clusters depending on its initialization.
 
 1. **Present metrics of perfomance for the chosen algorithm.**
     * In this case the silhouette analysis was performed to assess the
-      effectivenss of the clustering algorithm. Also the intra-group and
-      inter-group standard deviation and means were taken in consideration to
-      interpret the results of this clustering algorithm.
+      effectivenss of the clustering algorithm.  
+      Also the intra-group and inter-group standard deviation and means were
+      taken in consideration to interpret the results of this clustering
+      algorithm.
 
 1. **Discuss the metrics of performance to assess the clusters.**
-    * See [discussion of the clustering](#clustering) for a complete assessment
+    * See [discussion of the clustering](#clustering) for a detailed assessment
       of the clustering algorithm.
 
 1. **Explain the results.**
@@ -125,6 +137,10 @@ Standard deviation for the data set after preprocessing (abbreviated):
  perfil_c                 1.0
  perfil_d                 1.0
 
+That means that without scaling the four variables of 'valor' would dominate
+the clustering sensitivity, rendering the presence of the other variables
+useless.
+
 ### Nominal variables processing
 
 Some presented variables are categorical and do not meaningfully present any
@@ -136,8 +152,9 @@ for non identified gender does not mean that in this scenario that male >
 female.
 
 In order to overcome this problem categorical variables with N categories are
-transformed to new binary characteristics. To illustrate suppose that we begin
-only with `col1` and `col_a`, `col_b` and `col_c` are generated from them:
+transformed to new binary characteristics (then scaled as commented above). To
+illustrate suppose that we begin only with `col1` and `col_a`, `col_b` and
+`col_c` are generated from them:
 
 col1 col_a col_b col_c
 ---- ----- ----- -----
@@ -152,8 +169,8 @@ This allow them to be included in the K-Means clustering algorithm.
 
 ### Choice of the number of clusters
 
-I have chosen the numbers of clusters to be six. See the discussion below for
-details.
+**I have chosen the numbers of clusters to be six.** See the discussion below
+for details.
 
 *Before diving in the details of my choice, one cannot overstress the
 importance of the choice of the number of clusters. This is arguably the most
@@ -167,11 +184,12 @@ into clusters. It can be calculated to all data points and then averaged to
 provide a summary statistic. It ranges from -1 to 1:
 
 * Values near to -1: the data point was incorrectly clustered and should
-    belong to a different cluster
+  belong to a different cluster
 * Values near to zero: the point lies between two clusters and lack a
-    sharp belonging attribute (it could thus belong to both clusters)
-* Values near to one: the data point was correctly classified and lies near
-    to other data points in the same cluster
+  sharp 'belonging attribute' (it could thus belong to both clusters)
+* Values near to one: the data point was correctly classified and lies near to
+  other data points in the same cluster. Its cluster is adequately away
+  from other clusters
 
 From a pure technical standpoint choosing the number of clusters such that the
 average value for silhouette is maximum is the best option. On the other hand,
@@ -185,14 +203,15 @@ would be noisy as well.
 
 I have chosen the number of cluster to be 6 for a couple of different reasons.
 First of all, analyzing the average value for silhouette we can see that the
-average value for silhouette reaches a maximum at around 18 clusters.
+average value for silhouette reaches a maximum at around 18 clusters.  
+Thus we naively could choose the number of clusters to be 18.
 
-In the context of the **interpretability and communications** of the results one
-would preferably limit the number of clusters to a maximum of ~10.
+However in the context of the **interpretability and communications** of the
+results one would limit the number of clusters to a maximum of ~10.
 
 Back to the average silhouettes, we can see that it is an increasing function
 between 2 and 6 clusters, almost doubling its value in this interval. This
-means that the samples are on average better defined in the own cluster, and
+means that the samples are on average better defined in their own cluster and
 far away from other clusters. Another fact that indicates that 6 is a good
 number for clusters is that in this case just a few data points show a
 silhouette smaller than zero. In other words, just a few data points are
@@ -201,7 +220,7 @@ concentrated on cluster 2) ([see below](#silh6)). Using the same argumentation t
 cluster that is best defined is cluster 1 because of the high incidence of data
 points at near 0.75 silhouette value.
 
-![xxx](../output/clustering/silhouette_distribution_for_n=6_clusters.png){#silh6}
+![](../output/clustering/silhouette_distribution_for_n=6_clusters.png){#silh6}
 
 See [images for silhouette](#all_silh) for all images.
 
@@ -222,7 +241,7 @@ high inter-cluster variance for each variable.
 1. Has the most concentration of other marital status (that is, it is neither
    married nor single).
 
-![cluster0](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_outro.png)
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_outro.png)
 
 1. Has the highest age mean of all groups even though there is a high
    dispersion both intra and inter cluster for this variable.
@@ -241,7 +260,7 @@ high inter-cluster variance for each variable.
    profile A individuals.
 1. Has the most concentration young people.
 1. Has the highest average value of silhouette ([see above](#all_silh)).
-1. It is the cluster which aggregates most individuals (~1400)
+1. It is the cluster which aggregates most individuals (~1400).
 
 ### Cluster 2
 
@@ -276,7 +295,7 @@ high inter-cluster variance for each variable.
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_genero_f.png)
 
-1. XXX
+1. XXX TODO
 
 ### Cluster 5
 
@@ -290,7 +309,7 @@ high inter-cluster variance for each variable.
 variable in for this cluster).
 
 1. It is the smallest of all clusters: 245 individuals.
-1. c
+1. XXX TODO
 
 
 # Summary {#summary}
@@ -298,10 +317,10 @@ variable in for this cluster).
 The clusterization was conducted properly and yielded significant results. This
 is evidenced by:
 
-* A satisfactory value of silhouette (XXX)
+* A satisfactory value of silhouette (XXX TODO comment further XXX)
 * Some very sharp separations, some of which are coupled and yield easily
   interpretable results:
-    * a (coupled)
+    * a (coupled) XXX TODO
     * b (coupled)
     * c (single)
     * d (single)
@@ -311,14 +330,26 @@ is evidenced by:
 
 A quick summary of each cluster's characteristics are:
 
-* Cluster 0: (XXX one liner XXX)
-* Cluster 1: (XXX one liner XXX)
-* Cluster 2: (XXX one liner XXX)
-* Cluster 3: (XXX one liner XXX)
-* Cluster 4: (XXX one liner XXX)
-* Cluster 5: (XXX one liner XXX)
+* Cluster 0: (XXX TODO one liner XXX)
+* Cluster 1: (XXX TODO one liner XXX)
+* Cluster 2: (XXX TODO one liner XXX)
+* Cluster 3: (XXX TODO one liner XXX)
+* Cluster 4: (XXX TODO one liner XXX)
+* Cluster 5: (XXX TODO one liner XXX)
 
 # Additional information & Reproducibility
+
+## Reproducibility
+
+Reproducibility is going to be assessed in this task. In order to comply with
+it the software versions needed to replicate the experiement are specified
+below.
+
+Also non deterministic part of the algorithms are fixed using a defined random
+seed at `code/control.py` and invoked properly during code execution.
+
+Finally the code is hosted on github to allow any team to replicate and judge
+the results themselves.
 
 ## Tools
 * Vim
@@ -360,11 +391,16 @@ Python 3.6.1
 
 # Other remarks
 
-* Comment on the data set ; suggest improvements. XXX
+* Comment on the data set ; suggest improvements. XXX TODO
 
 # Next steps
 
-* XXX
+* XXX TODO: close and comment all open 'XXX TODO'.
+* XXX TODO: coding conventions and style will also be assessed.
+    * Comment that it is PEP8 compliant
+        * Comment on python-mode and contributions
+    * Comment on docstrings style
+        * Comment on sphinx documentation
 
 # All output from python code
 
@@ -372,21 +408,21 @@ Python 3.6.1
 
 ### Silhouette {#all_silh}
 
-XXX
+XXX TODO
 
 ### Clusters {#all_silh}
 
 Notice that the error bars represented here are +- 1 standard deviation.
 
-XXX
+XXX TODO
 
 ## Code output (stdout) {#stdout}
 
-XXX
+XXX TODO
 
 # Bibliography
 
-XXX Improve XXX
+XXX TODO Improve XXX
 
 ## K-Means algorithm
 
@@ -402,4 +438,4 @@ XXX Improve XXX
 
 1. <http://scikit-learn.org/stable/modules/preprocessing.html>
 
-1. XXX
+1. XXX TODO
