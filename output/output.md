@@ -22,8 +22,9 @@ The first tab contained 4973 entries (N=4973), one unique ID and 10
 characteristics.  
 The second tab has entries which are not described elsewhere. The lack of a
 formal description casts unecessary uncertainty into the data at hand.  Lack of
-proper definition is a discouraged practice in data creation (e.g.: research
-method) and methodology must not be open for interpretation.
+proper definition is a discouraged practice in data creation (e.g.: absence of
+research method and methodology). Data definition must not be open for
+interpretation.
 
 A remarkable fact of this data set is that it does not contain any null values.
 Such high quality data sets are rare to find and may indicate that its source
@@ -31,29 +32,29 @@ is very thoughtful of its data management.
 
 A final remark is that the characteristics' names should not be considered self
 explanatory. A codebook is often use to describe published data.  
-To illustrate the critique above consider the variable 'VALOR_01' (value_01).
+To illustrate the critique above consider the variable 'VALOR_01' (value_01;
+there are 4 of these variables).
 To what value does it refer to? Is it the amount already invested in the
 investment platform? Is it the income enumerated by different sources of
 income? Is it profit? If it is income, is it yearly or monthly?  
 Another illustration is the 'GEO_REFERENCIA' (georeference) variable. It has
 values ranging from 10 to 999 but it is not explained elsewhere. Usual
 geolocation information are comprised of x and y coordinates or other better
-known formats. Consequently this variable has been neglected in the present
-analysis.
+known formats.  
+Consequently this variable has been neglected in the present analysis.
 
 As one can see, this seemingly unimportant differences may yield different
-interpretations later on the data analysis and render some conclusions useless.
+interpretations later on the data analysis and render some conclusions useless
+or even worse: wrong.
 
 
-* TODO: include total income/total value in dicusssion. XXX
-* TODO: comment on data set: non nulls
-* TODO: comment on geo_referencia
+* XXX TODO: include total income/total value in dicusssion. XXX
 
 # Approach
 
 As stated in the challenge description my work should:
 
-1. *Group users, finding well defined groups with common characteristics.*
+1. **Group users finding well defined groups with common characteristics.**
     * In order to do that I have clustered the data set using the K-Means
       clustering algorithm.
 
@@ -65,11 +66,11 @@ As stated in the challenge description my work should:
       It also allows the specification of the number of clusters to be found.
       This is seen as drawback sometimes. Yet I think that it can be overcome
       with successively running the algorithm with a different cluster number.  
-      Also it tends to yield clusters with similar size. This is may be a
-      desired characteristic in a business setting for example, where
-      investment of resources (time and capital) may be applied to each cluster
-      of clients. In such cases one does not want to invest those in a cluster
-      just to find out that it aggregates to just 1% of their clientele.
+      Also it tends to yield clusters with similar size. This may be a desired
+      characteristic in a business setting for example, where investment of
+      resources (time and capital) may be applied to a cluster of clients.  In
+      such cases one does not want to invest those in a cluster just to find
+      out that it aggregates to just a few individuals of their clientele.
 
 1. **Present metrics of perfomance for the chosen algorithm.**
     * In this case the silhouette analysis was performed to assess the
@@ -88,8 +89,64 @@ As stated in the challenge description my work should:
 # Results {#results}
 
 ## Preprocessing
-* categorical to binary
-* scaling
+
+### Variable scaling
+
+The received data needed preprocessing before applying te clustering method.
+That is because the K-Means clustering method is sensitive to variable scaling
+(more precisely to variance). Without scaling variables tend to have a
+variances of different orders of magnitude (standard deviation for the data set
+before preprocessing):
+
+ variable                 std
+----------               -----------
+ valor_01                  6098.823
+ valor_02                 89180.835
+ valor_03                 37645.943
+ valor_04                 23246.037
+ age                         10.792
+ estado_civil_solteiro        0.500
+ estado_civil_casado          0.486
+ estado_civil_outro           0.297
+ genero_m                     0.416
+ genero_f                     0.416
+ perfil_a                     0.458
+ perfil_b                     0.416
+ perfil_c                     0.216
+ perfil_d                     0.161
+
+Standard deviation for the data set after preprocessing (abbreviated):
+
+ variable                 std
+----------               -----
+ valor_01                 1.0
+ valor_02                 1.0
+ (...)                    1.0
+ perfil_c                 1.0
+ perfil_d                 1.0
+
+### Nominal variables processing
+
+Some presented variables are categorical and do not meaningfully present any
+interpretation from a numerical standpoint. For example, height may be compared
+so that a person who is 170 cm high is higher than someone who is 165 cm.  
+There is no parallel to variables which represent 'non rankable' variables such
+as gender and ethnicity. Assigning a value of 1 for male, 0 for female and 2
+for non identified gender does not mean that in this scenario that male >
+female.
+
+In order to overcome this problem categorical variables with N categories are
+transformed to new binary characteristics. To illustrate suppose that we begin
+only with `col1` and `col_a`, `col_b` and `col_c` are generated from them:
+
+col1 col_a col_b col_c
+---- ----- ----- -----
+a    1     0     0
+b    0     1     0
+c    0     0     1
+a    1     0     0
+
+This allow them to be included in the K-Means clustering algorithm.
 
 ## Clustering {#clustering}
 
@@ -98,27 +155,40 @@ As stated in the challenge description my work should:
 I have chosen the numbers of clusters to be six. See the discussion below for
 details.
 
-Before diving in the details of my choice, one cannot overstress the importance
-of the choice of the number of clusters. This is arguably the most tricky
-decision in this challenge as it deals with a great mix of technical as well as
-non-technical details.
+*Before diving in the details of my choice, one cannot overstress the
+importance of the choice of the number of clusters. This is arguably the most
+tricky decision in this challenge as it deals with a great mix of technical as
+well as non-technical details.*
 
-* overstress importance
+#### Silhouette analysis (technical analysis)
+
+Silhouette analysis is a technique used to compare how well your data is sorted
+into clusters. It can be calculated to all data points and then averaged to
+provide a summary statistic. It ranges from -1 to 1:
+
+* Values near to -1: the data point was incorrectly clustered and should
+    belong to a different cluster
+* Values near to zero: the point lies between two clusters and lack a
+    sharp belonging attribute (it could thus belong to both clusters)
+* Values near to one: the data point was correctly classified and lies near
+    to other data points in the same cluster
+
+From a pure technical standpoint choosing the number of clusters such that the
+average value for silhouette is maximum is the best option. On the other hand,
+working with such a large number of clusters may hinder the interpretability of
+the results as clusters probably would not have a sharp distinction between
+them (consider that our data set has 10 dimensions originally).  Probably the
+communication of such results for a multidiscipliniary team of mixed background
+would be noisy as well.
+
+#### Real world analysis (non-technical analysis)
 
 I have chosen the number of cluster to be 6 for a couple of different reasons.
 First of all, analyzing the average value for silhouette we can see that the
 average value for silhouette reaches a maximum at around 18 clusters.
 
-From a pure technical standpoint choosing n_clusters such that the average
-value for silhouette is maximum is the best option. On the other hand, working
-with such a large number of clusters may hinder the interpretability of the
-results as clusters probably would not have a sharp distinction between them
-(consider that our data set has 10 dimensions originally).  
-Probably the communication of such results for a multidiscipliniary team of
-mixed background would be noisy as well.
-
-In the light of such considerations one would preferably limit the number of
-clusters to a maximum of ~10.
+In the context of the **interpretability and communications** of the results one
+would preferably limit the number of clusters to a maximum of ~10.
 
 Back to the average silhouettes, we can see that it is an increasing function
 between 2 and 6 clusters, almost doubling its value in this interval. This
@@ -129,8 +199,10 @@ silhouette smaller than zero. In other words, just a few data points are
 incorrectly labeled in their cluster (those data points are unfrequent and are
 concentrated on cluster 2) ([see below](#silh6)). Using the same argumentation the
 cluster that is best defined is cluster 1 because of the high incidence of data
-points at near .75 silhouette value.
+points at near 0.75 silhouette value.
+
 ![xxx](../output/clustering/silhouette_distribution_for_n=6_clusters.png){#silh6}
+
 See [images for silhouette](#all_silh) for all images.
 
 ## Cluster interpretation
@@ -149,7 +221,9 @@ high inter-cluster variance for each variable.
 
 1. Has the most concentration of other marital status (that is, it is neither
    married nor single).
+
 ![cluster0](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_outro.png)
+
 1. Has the highest age mean of all groups even though there is a high
    dispersion both intra and inter cluster for this variable.
 
@@ -158,12 +232,16 @@ high inter-cluster variance for each variable.
 *Distinctive features:*
 
 1. Has the most concentration of single persons ('solteiro').
-![cluster1](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_solteiro.png)
+
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_solteiro.png)
+
 1. It is solely composed of male individuals (absence of 'genenro_f'). This
    also happens to cluster 2 and cluster 3.
 1. Has the most concentration of profile D ('perfil_d'). Also contains a lot of
    profile A individuals.
 1. Has the most concentration young people.
+1. Has the highest average value of silhouette ([see above](#all_silh)).
+1. It is the cluster which aggregates most individuals (~1400)
 
 ### Cluster 2
 
@@ -172,7 +250,9 @@ high inter-cluster variance for each variable.
 1. Has the highest averages for 'valor_02', 'valor_03' and 'valor_04'.
    In respect to these 3 variables all the other groups have much lower
    averages.
-![cluster2](../output/clustering/cluster_analysis_cluster_mean_of_variables_valor_02.png)
+
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_valor_02.png)
+
 1. Includes almost solely profile B people.
 1. Contains almost solely males.
 
@@ -182,7 +262,9 @@ high inter-cluster variance for each variable.
 
 1. It is the group with the highest proportion of married individuals
    ('estado_civil_casado').
-![cluster3](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_casado.png)
+
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_casado.png)
+
 1. The cluster is entirely comprised of male individuals.
 1. The cluster contains only individuals from profile A and profile D.
 
@@ -190,16 +272,24 @@ high inter-cluster variance for each variable.
 
 *Distinctive features:*
 
-1. a
-1. b
-1. c
+1. Comprised solely of female subjects:
+
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_genero_f.png)
+
+1. XXX
 
 ### Cluster 5
 
 *Distinctive features:*
 
-1. a
-1. b
+1. Comprised solely of profile C:
+
+![](../output/clustering/cluster_analysis_cluster_mean_of_variables_perfil_c.png)
+
+(the absence of the errorbar indicates that there in only one value for this
+variable in for this cluster).
+
+1. It is the smallest of all clusters: 245 individuals.
 1. c
 
 
@@ -267,7 +357,6 @@ Python 3.6.1
     There is no warranty, not even for merchantability or fitness
     for a particular purpose.
     ```
-XXX
 
 # Other remarks
 
@@ -293,4 +382,24 @@ XXX
 
 ## Code output (stdout) {#stdout}
 
-XXX 
+XXX
+
+# Bibliography
+
+XXX Improve XXX
+
+## K-Means algorithm
+
+1. <https://en.wikipedia.org/wiki/K-means_clustering>
+
+## Silhouette analysis
+
+1. <http://scikit-learn.org/stable/modules/clustering.html#silhouette-coefficient>
+
+1. <http://www.sciencedirect.com/science/article/pii/0377042787901257>
+
+## Preprocessing
+
+1. <http://scikit-learn.org/stable/modules/preprocessing.html>
+
+1. XXX
