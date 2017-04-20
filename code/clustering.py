@@ -11,6 +11,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, silhouette_samples
 
 import control
+from interpretation import print_feature
 
 def preprocess_data(dataframe):
     """Preprocess the data.
@@ -20,6 +21,9 @@ def preprocess_data(dataframe):
 
     """
     processed_dataframe = dataframe.copy(True).apply(scale)
+    print_feature('The effect of preprocessing on standard deviation')
+    print('\tbefore:\n', dataframe.std(), sep='')
+    print('\tafter:\n', processed_dataframe.std(), sep='')
     # print(tuple(zip(dataframe.mean(), dataframe.std())))
 
     return processed_dataframe
@@ -36,6 +40,9 @@ def get_n_clusters(dataframe, max_clusters=10):
     sil_avg_list = []
     sil_std_list = []
     cluster_labels_dict = dict()
+
+    print_feature('Number of data points per cluster')
+
     for n in cluster_list:
         # Create the cluster.
         cluster = KMeans(n_clusters=n, random_state=control.RANDOM_SEED)
@@ -62,7 +69,7 @@ def get_n_clusters(dataframe, max_clusters=10):
                 data={'cluster': cluster_labels,
                       'sil': sil_ind})
             # Iterate over cluster and axes
-            print(n, 70*'-')
+            print('For', n, 'clusters', 55*'-')
             for i in range(n):
                 l = dataframe_of_sil.ix[dataframe_of_sil.cluster == i, 'sil']
                 print(l.shape)

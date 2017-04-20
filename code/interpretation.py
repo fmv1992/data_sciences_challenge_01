@@ -8,9 +8,9 @@ import seaborn as sns
 
 
 def print_feature(feature):
-    """Prints a feature in a nice way (aesthetics)."""
+    """Print a feature in a nice way (aesthetics)."""
     feature = feature + '   '
-    print('\n{0:-<70s}\n'.format(feature), 70*'-', sep='')
+    print('\n', 70*'-', '\n{0:-<70s}\n'.format(feature), 70*'-', sep='')
     return None
 
 
@@ -18,8 +18,8 @@ def describe_clusters(dataframe):
     """Describe clusters and give them interpretability."""
     gb = dataframe.groupby('cluster')
 
-    print_feature('N per cluster')
-    print(gb.count()['id'])
+    # print_feature('N per cluster')
+    # print(gb.count()['id'])
 
     print_feature('Cluster standard deviation of variables')
     cluster_std = gb.std()
@@ -50,7 +50,7 @@ def plot_cluster_analysis(dataframe, error, title):
     """Plot cluster analysis on the same figure."""
     for column in dataframe:
         fig, ax = plt.subplots()
-        ax = sns.barplot(x=dataframe.index,
+        ax = sns.barplot(x=dataframe.index,  # noqa
                          y=dataframe[column],
                          # estimator=mean x: x,
                          yerr=error[column],
@@ -63,8 +63,4 @@ def plot_cluster_analysis(dataframe, error, title):
             os.path.join(control.CLUSTERING_PATH, filename),
             dpi=300)
 
-
-
-if __name__ == '__main__':
-    print_feature('abba')
-    print_feature('cab cab')
+        return None
