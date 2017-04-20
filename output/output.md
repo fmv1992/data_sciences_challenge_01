@@ -2,11 +2,48 @@
 
 # Description
 
-This is the complete document of the challenge.
+This is the complete document of the challenge proposed by Easynvest.
+Disclosure of company name and publishing of the results were explicitly
+authorized by their recruiting team.
+
+Easynvest is a fintech company, more specifically a digital broker-dealer which
+helps thousands of clients to invest their money easily and quickly. They are
+known for their online platform and strong digital presence.
+
+The complete description of the challenge may be found in the file
+`challenge_description/challenge_description.pdf` (in Portuguese).
 
 # Introduction
 
-# The data set
+## The data set
+
+The data set received was in the form of an Excel spreadsheet with two tabs.
+The first tab contained 4973 entries (N=4973), one unique ID and 10
+characteristics.  
+The second tab has entries which are not described elsewhere. The lack of a
+formal description casts unecessary uncertainty into the data at hand.  Lack of
+proper definition is a discouraged practice in data creation (e.g.: research
+method) and methodology must not be open for interpretation.
+
+A remarkable fact of this data set is that it does not contain any null values.
+Such high quality data sets are rare to find and may indicate that its source
+is very thoughtful of its data management.
+
+A final remark is that the characteristics' names should not be considered self
+explanatory. A codebook is often use to describe published data.  
+To illustrate the critique above consider the variable 'VALOR_01' (value_01).
+To what value does it refer to? Is it the amount already invested in the
+investment platform? Is it the income enumerated by different sources of
+income? Is it profit? If it is income, is it yearly or monthly?  
+Another illustration is the 'GEO_REFERENCIA' (georeference) variable. It has
+values ranging from 10 to 999 but it is not explained elsewhere. Usual
+geolocation information are comprised of x and y coordinates or other better
+known formats. Consequently this variable has been neglected in the present
+analysis.
+
+As one can see, this seemingly unimportant differences may yield different
+interpretations later on the data analysis and render some conclusions useless.
+
 
 * TODO: include total income/total value in dicusssion. XXX
 * TODO: comment on data set: non nulls
@@ -14,13 +51,47 @@ This is the complete document of the challenge.
 
 # Approach
 
-# Results
+As stated in the challenge description my work should:
+
+1. Group users, finding well defined groups with common characteristics.
+    * In order to do that I have clustered the data set using the K-Means
+      clustering algorithm.
+
+1. Justify the chosen clustering algorithm.
+    * This algorithm is one of the most commonly used algorithm in Data
+      Sciences. As such one can easily find support, implementations,
+      discussions and suggestions on various references. Such vast amount of
+      information is not something to be neglected.  
+      It also allows the specification of the number of clusters to be found.
+      This is seen as drawback sometimes. Yet I think that it can be overcome
+      with successively running the algorithm with a different cluster number.  
+      Also it tends to yield clusters with similar size. This is may be a
+      desired characteristic in a business setting for example, where
+      investment of resources (time and capital) may be applied to each cluster
+      of clients. In such cases one does not want to invest those in a cluster
+      just to find out that it aggregates to just 1% of their clientele.
+
+1. Present metrics of perfomance for the chosen algorithm
+    * In this case the silhouette analysis was performed to assess the
+      effectivenss of the clustering algorithm. Also the intra-group and
+      inter-group standard deviation and means were taken in consideration to
+      interpret the results of this clustering algorithm.
+
+1. Discuss the metrics of performance to assess the clusters.
+    * See [discussion of the clustering](#clustering) for a complete assessment
+      of the clustering algorithm.
+
+1. Explain the results.
+    * See the [results](#results) and [summary](#summary) sections for a
+      precise answer to this question.
+
+# Results {#results}
 
 ## Preprocessing
 * categorical to binary
 * scaling
 
-## Clustering
+## Clustering {#clustering}
 
 ### Choice of the number of clusters
 
@@ -126,7 +197,7 @@ high inter-cluster variance for each variable.
 1. c
 
 
-# Summary
+# Summary {#summary}
 
 # Additional information & Reproducibility
 
@@ -137,16 +208,16 @@ high inter-cluster variance for each variable.
 python3 --version
 Python 3.6.1
 ```
-* pthon modules:
-TODO
-
-## Software version
-
+* python modules:
+    * mod1
+    * mod1
+    * mod1
+* pandoc
 TODO
 
 # Other remarks
 
-* Comment on the data set 
+* Comment on the data set ; suggest improvements.
 
 # Next steps
 
