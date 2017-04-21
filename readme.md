@@ -1,34 +1,58 @@
-# Code challenge easynvest
+# Easynvest Code challenge
 
-***(work in progress)***
-***(see results section below for indication of partial results)***
+The publishing of the challenge and results were authorized by Easynvest
+staff.
 
 # Description
 
-This document is a high level description of what is the challenge, what is the
+This file is a high level description of what is the challenge, what is the
 data set, how was the approach and the results.
+
+***The full results and discussion are in `output/output.html`.***
+
+Notice that github does not render html files. For convenience either load the
+file at:
+
+<http://htmlpreview.github.io/>
+
+or clone the repository and open the file in your web-browser.
 
 # The challenge
 
-***(work in progress)***
-***(see results section below for indication of partial results)***
+The challenge is to interpret and group a given data set. Interpretation,
+coding quality, reproducibility and presentation of the results are some of the
+assessment criteria.
+
+See `./challenge_description/challenge_description.pdf` for description.
 
 # The data set
 
-***(work in progress)***
-***(see results section below for indication of partial results)***
+The original dataset was given as a xlsx spreadsheet and was converted to csv
+format for convenience.
 
 # Approach
 
-***(work in progress)***
-***(see results section below for indication of partial results)***
+A high level definition of the approach is:
+
+* Understanding and investigating the data set (exploratory analysis)
+* Choice of clusterization algorithm and choice of the number of clusters
+* Carrying out the interpretation
+
+Methods and tools:
+
+* Python was used to perform data analysis
+* Pandoc and pandoc markdown were used to craft the report
+* Vim and unixes tools were used to manage the project (git, other unixes
+    programs such as less, cat, time, grep, etc)
 
 # Results
 
-A partial result is available on `output/partial_results/*`.
+A partial result is available on `./output/partial_results/*`.
 
-The results are crafted with the `output/output.md` using pandoc. Thus they are
-available on a couple of different formats.
+A final result is available on `./output/output.html`.
+
+The results are crafted using pandoc. Thus they are available on a couple of
+different formats.
 
 ```
 pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
@@ -37,10 +61,6 @@ pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
 --standalone  -s ./*md -o $(cygpath -w /tmp/output.html)
 ```
 
-I recommend the html version which is the one I've been using to get feedback.
-
-**Do not read the markdown version as it is a pandoc markdown syntax and thus
-not properly rendered by github.**
-
-For your convenience the website <http://htmlpreview.github.io/> can render
-html files on github.
+***I recommend the html version which is the one I've been using to get
+feedback.***  
+Docx and pdf versions are provided for convenience.
