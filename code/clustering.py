@@ -114,8 +114,3 @@ def get_n_clusters(dataframe, max_clusters=10):
         dpi=300)
 
     return cluster_labels_dict
-
-
-def clusterize_dataframe(dataframe):
-    """Create clusters from input dataframe."""
-    pass
