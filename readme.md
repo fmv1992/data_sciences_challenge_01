@@ -11,11 +11,10 @@ data set, how was the approach and the results.
 ***The full results and discussion are in `output/output.html`.***
 
 Notice that github does not render html files. For convenience either load the
-file at:
+file at this preview service: [htmlpreview](http://htmlpreview.github.io/?https://github.com/fmv1992/data_sciences_challenge_01/blob/develop/output/final_results/output.html).
 
-<http://htmlpreview.github.io/>
-
-or clone the repository and open the file in your web-browser.
+Or you can clone the repository and open the file in your web-browser
+`./output/final_results/output.html`.
 
 # The challenge
 
@@ -63,4 +62,5 @@ pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
 
 ***I recommend the html version which is the one I've been using to get
 feedback.***  
-Docx and pdf versions are provided for convenience.
+Docx and pdf versions are provided for convenience. Their rendering fidelity to
+the final deliverable is not warranted though.
