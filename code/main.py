@@ -10,7 +10,16 @@ import interpretation
 
 
 def main():
-    """Main function for Code Challenge by Easynvest."""
+    """Main function for Code Challenge by Easynvest.
+
+    Invoke all necessary commands to enable execution of this challenge.
+
+    A simple usage of `python3 ./main.py` should create all support files to
+    enable clusterization assessment.
+
+    Return None.
+
+    """
     # Load the data.
     df_dados = pd.read_csv(control.DADOS_PATH,
                            encoding='latin1',

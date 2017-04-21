@@ -13,7 +13,11 @@ import seaborn as sns
 
 
 def print_feature(feature):
-    """Print a feature in a nice and consistent way (aesthetics)."""
+    """Print a feature in a nice and consistent way (aesthetics).
+
+    Return None.
+
+    """
     feature = feature + '   '
     print('\n', 70*'-', '\n{0:-<70s}\n'.format(feature), 70*'-', sep='')
     return None
@@ -25,6 +29,8 @@ def describe_clusters(dataframe):
     Print a set of important data to stdout to enable cluster interpretation.
 
     Also saves plot for each cluster.
+
+    Return None.
 
     """
     # Group clusters.
@@ -68,7 +74,14 @@ def describe_clusters(dataframe):
 
 
 def plot_cluster_analysis(dataframe, error, title):
-    """Plot cluster analysis."""
+    """Plot cluster analysis.
+
+    For each available column produce a corrisponding image to enhance
+    interpretability of the results.
+
+    Return None.
+
+    """
     for column in dataframe:
         fig, ax = plt.subplots()
         ax = sns.barplot(x=dataframe.index,  # noqa

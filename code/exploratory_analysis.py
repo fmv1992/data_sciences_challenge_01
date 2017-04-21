@@ -13,7 +13,11 @@ import control
 
 
 def main(*args):
-    """Conduct exploratory analysis to better understand our data set."""
+    """Conduct exploratory analysis to better understand our data set.
+
+    Return None
+
+    """
     # Create a list of figures with exploratory data.
     figures = []
     for dataframe in args:

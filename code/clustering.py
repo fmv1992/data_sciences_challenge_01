@@ -33,10 +33,12 @@ def preprocess_data(dataframe):
 
 
 def get_n_clusters(dataframe, max_clusters=10):
-    """Return the adequate number of clusters for the dataset.
+    """Help find the adequate number of clusters for the dataset.
 
-    Return the adequate number of clusters for the dataset using the
+    Help find the adequate number of clusters for the dataset using the
     'silhouette method'.
+
+    Return None.
 
     """
     cluster_list = tuple(range(2, max_clusters))
@@ -117,10 +119,12 @@ def get_n_clusters(dataframe, max_clusters=10):
 
 
 def create_120_silh_plot(dataframe):
-    """Return the adequate number of clusters for the dataset.
+    """Create a silhouette plot for K-Means cluster from 2 clusters to 120.
 
-    Return the adequate number of clusters for the dataset using the
-    'silhouette method'.
+    WARNING: the running time for this function is very long (~ 7min).
+    Using the keyword argument 'j_jobs' breaks in cygwin.
+
+    Return None
 
     """
     cluster_list = tuple(range(2, 120))
@@ -131,8 +135,8 @@ def create_120_silh_plot(dataframe):
     for n in cluster_list:
         # Create the cluster.
         cluster = KMeans(n_clusters=n,
-                        random_state=control.RANDOM_SEED,
-                        n_jobs=1)
+                         random_state=control.RANDOM_SEED,
+                         n_jobs=1)
         cluster_labels = cluster.fit_predict(dataframe)
         cluster_labels_dict[n] = cluster_labels
 

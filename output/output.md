@@ -416,16 +416,16 @@ would not fit well in the flow of the assignment.
 
     It is dominated by the plotting of different k-means silhouettes. The rest of
     the code runs in less than one minute (full running time is kept for
-    reproducibility).
+    reproducibility).  
+    A possible speedup would be to run the KMeans object with the keyword
+    argument n_jobs=-1 but this causes cygwin (the platform in which this code
+    is being developed) to halt. Possibly in normal windows/linux environments
+    this would not happen.
 
 # Next steps
 
-* XXX TODO: close and comment all open 'XXX TODO'.
-* XXX TODO: coding conventions and style will also be assessed.
-    * Comment that it is PEP8 compliant
-        * Comment on python-mode and contributions
-    * Comment on docstrings style
-        * Comment on sphinx documentation
+* No more next steps are needed. The code is in its final version as well as
+  the output file.
 
 # All output from python code {#all_ouput}
 
