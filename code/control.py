@@ -1,4 +1,5 @@
 """Set variables for code challenge by Easynvest."""
+
 import os
 import numpy as np
 import pandas as pd
@@ -21,7 +22,6 @@ OUTPUT_PATH = '../output/'
 EXPL_ANALYSIS_PATH = os.path.join(
     OUTPUT_PATH,
     'exploratory_analyses')
-
 CLUSTERING_PATH = os.path.join(
     OUTPUT_PATH,
     'clustering')

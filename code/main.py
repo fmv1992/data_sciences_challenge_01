@@ -1,6 +1,5 @@
 """Execute the Code Challenge by Easynvest."""
 import pandas as pd
-import numpy as np
 
 from data_utilities import pandas_utilities as pu
 
@@ -28,13 +27,12 @@ def main():
     # Uniformize the data.
     for obj_column in filter(lambda x: df_dados[x].dtype.name == 'category',
                              df_dados.columns):
-        df_dados[obj_column] = df_dados[obj_column].str.lower().astype('category')
-
-    # TODO: add a total value (possibly total income).
-    # XXX
+        df_dados[obj_column] = df_dados[obj_column].str.lower().astype(
+            'category')
 
     # Round to day as hour of birth may be considered unnecessary.
-    df_dados['data_nascimento_int'] = df_dados['data_nascimento'].astype('int64')
+    df_dados['data_nascimento_int'] = df_dados['data_nascimento'].astype(
+        'int64')
     # Create an age variable
     # Assume the dataset is from 2017/01/01.
     creation_date = pd.Timestamp(year=2017, day=1, month=1)
@@ -47,14 +45,13 @@ def main():
     df_dados['age'] = age
 
     # Generate the exploratory analyses.
-    # TODO: put it back
-    # exploratory_analysis.main(df_dados.drop('data_nascimento', axis=1))
+    exploratory_analysis.main(df_dados.drop('data_nascimento', axis=1))
 
     # For simplicity lets split 'ESTADO CIVIL' in three groups.
     est_civil = df_dados.estado_civil
     is_solteiro = est_civil.str.contains('solteir')
     is_casado = est_civil.str.contains('casad')
-    is_outro = ( ~ (is_solteiro | is_casado))
+    is_outro = (~ (is_solteiro | is_casado))
     df_dados = df_dados.drop('estado_civil', axis=1)
     df_dados['estado_civil' + '_' + 'solteiro'] = is_solteiro
     df_dados['estado_civil' + '_' + 'casado'] = is_casado
@@ -70,7 +67,6 @@ def main():
     # Map 'perfil' to binary but do not drop it (it may be already a cluster).
     for one_perfil in df_dados.perfil.unique():
         df_dados['perfil_' + one_perfil] = df_dados.perfil == one_perfil
-
 
     # In this case since there are a lot of professions but not too many time,
     # I have decided not to transform 'profissao' into binary variables. If I
@@ -93,7 +89,6 @@ def main():
     n_clusters = 6
     cluster_labels = all_cluster_labels[n_clusters]
     del all_cluster_labels
-
 
     # Interpret cluster data.
     df_dados['cluster'] = cluster_labels

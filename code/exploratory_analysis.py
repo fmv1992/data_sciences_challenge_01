@@ -1,4 +1,9 @@
-"""Conduct exploratory analysis to better understand our data set."""
+"""Conduct exploratory analysis to better understand our data set.
+
+Generate quick and easy visualization which may help us understand the data set
+at hand.
+
+"""
 import itertools
 import os
 
@@ -9,13 +14,13 @@ import control
 
 def main(*args):
     """Conduct exploratory analysis to better understand our data set."""
-    figures = []
-
     # Create a list of figures with exploratory data.
+    figures = []
     for dataframe in args:
-        fig = mu.histogram_of_dataframe(dataframe,
-                                  output_path=None,  # Manually save figures.
-                                  kde=False)
+        fig = mu.histogram_of_dataframe(
+            dataframe,
+            output_path=None,  # Manually save figures.
+            kde=False)
         figures.append(fig)
 
     # Manually save figures in order to be able to rotate axes.

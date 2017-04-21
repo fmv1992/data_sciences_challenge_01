@@ -1,4 +1,5 @@
 """Cluster the data."""
+
 import os
 
 import numpy as np
@@ -13,18 +14,20 @@ from sklearn.metrics import silhouette_score, silhouette_samples
 import control
 from interpretation import print_feature
 
+
 def preprocess_data(dataframe):
     """Preprocess the data.
 
     Preprocess the data because K-means clustering is sensitive to
     scaling.
 
+    Return the preprocessed dataframe.
+
     """
     processed_dataframe = dataframe.copy(True).apply(scale)
     print_feature('The effect of preprocessing on standard deviation')
     print('\tbefore:\n', dataframe.std(), sep='')
     print('\tafter:\n', processed_dataframe.std(), sep='')
-    # print(tuple(zip(dataframe.mean(), dataframe.std())))
 
     return processed_dataframe
 
@@ -93,12 +96,12 @@ def get_n_clusters(dataframe, max_clusters=10):
             fig.savefig(
                 os.path.join(
                     control.CLUSTERING_PATH,
-                    'silhouette_distribution_for_n={0:d}_clusters.png'.format(n)),
+                    'silhouette_distribution_for_n={0:d}_clusters.png'.format(
+                        n)),
                 dpi=300)
 
     # Plot the silhouette.
     fig, ax = plt.subplots()
-    # ax.plot(cluster_list, sil_avg_list)
     plt.errorbar(cluster_list, sil_avg_list, sil_std_list)
     ax.set_xlabel('Number of clusters')
     ax.set_ylabel('Average value for silhouette')
@@ -109,7 +112,6 @@ def get_n_clusters(dataframe, max_clusters=10):
             control.CLUSTERING_PATH,
             'silhouette.png'),
         dpi=300)
-
 
     return cluster_labels_dict
 
