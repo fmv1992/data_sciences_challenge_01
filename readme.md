@@ -8,12 +8,10 @@ staff.
 This file is a high level description of what is the challenge, what is the
 data set, how was the approach and the results.
 
-***The full results and discussion are in `output/output.html`.***
-
-Notice that github does not render html files. For convenience either load the
-file at this preview service: [htmlpreview](http://htmlpreview.github.io/?https://github.com/fmv1992/data_sciences_challenge_01/tree/develop/output/final_results/output.html).
-
-Or you can clone the repository and open the file in your web-browser
+***The full results and discussion are in
+`./output/final_results/output.html`.***  
+In order to view the final results please open the file (do not load the github
+file as github does not render html files but rather it shows its code):
 `./output/final_results/output.html`.
 
 # The challenge
