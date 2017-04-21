@@ -10,7 +10,6 @@
 </head>
 <body>
 <h1 id="code-challenge-easynvest">Code challenge easynvest</h1>
-<p><strong><em>(work in progress)</em></strong></p>
 <h1 id="description">Description</h1>
 <p>This is the complete document of the challenge proposed by Easynvest. Disclosure of company name and publishing of the results were explicitly authorized by their recruiting team.</p>
 <p>Easynvest is a fintech company, more specifically a digital broker-dealer which helps thousands of clients to invest their money easily and quickly. They are known for their online platform and strong digital presence.</p>
@@ -389,22 +388,12 @@ for a particular purpose.</code></pre></li>
 <li><p>Approximate running time for the <code>main.py</code> is 7 minutes on commodity hardware:</p>
 <pre><code>time python3 main.py
     7:06.02</code></pre>
-<p>It is dominated by the plotting of different k-means silhouettes. The rest of the code runs in less than one minute (full running time is kept for reproducibility).</p></li>
+<p>It is dominated by the plotting of different k-means silhouettes. The rest of the code runs in less than one minute (full running time is kept for reproducibility).<br />
+A possible speedup would be to run the KMeans object with the keyword argument n_jobs=-1 but this causes cygwin (the platform in which this code is being developed) to halt. Possibly in normal windows/linux environments this would not happen.</p></li>
 </ul>
 <h1 id="next-steps">Next steps</h1>
 <ul>
-<li>XXX TODO: close and comment all open 'XXX TODO'.</li>
-<li>XXX TODO: coding conventions and style will also be assessed.
-<ul>
-<li>Comment that it is PEP8 compliant
-<ul>
-<li>Comment on python-mode and contributions</li>
-</ul></li>
-<li>Comment on docstrings style
-<ul>
-<li>Comment on sphinx documentation</li>
-</ul></li>
-</ul></li>
+<li>No more next steps are needed. The code is in its final version as well as the output file.</li>
 </ul>
 <h1 id="all_ouput">All output from python code</h1>
 <h2 id="all_plots">All the images</h2>

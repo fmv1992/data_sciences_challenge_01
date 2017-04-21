@@ -1,7 +1,5 @@
 # Code challenge easynvest
 
-***(work in progress)***
-
 # Description
 
 This is the complete document of the challenge proposed by Easynvest.
