@@ -41,7 +41,7 @@ def get_n_clusters(dataframe, max_clusters=10):
     sil_std_list = []
     cluster_labels_dict = dict()
 
-    print_feature('Number of data points per cluster')
+    print_feature('Features for different number of clusters')
 
     for n in cluster_list:
         # Create the cluster.
@@ -60,6 +60,10 @@ def get_n_clusters(dataframe, max_clusters=10):
         sil_std = np.std(sil_ind)
         sil_std_list.append(sil_std)
 
+        # Print results.
+        print('Silhouette average for', n, 'clusters',
+              '{0:1.3f}'.format(sil_avg))
+
         # Plot silhouettes on the same histogram for low values of cluster.
         if n <= 7:
             fig, axes = plt.subplots(n, 1, sharex=True, sharey=True,
@@ -69,7 +73,8 @@ def get_n_clusters(dataframe, max_clusters=10):
                 data={'cluster': cluster_labels,
                       'sil': sil_ind})
             # Iterate over cluster and axes
-            print('For', n, 'clusters', 55*'-')
+            print('Number of individuals per cluster for', n, 'clusters',
+                  21*'-')
             for i in range(n):
                 l = dataframe_of_sil.ix[dataframe_of_sil.cluster == i, 'sil']
                 print(l.shape)

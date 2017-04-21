@@ -45,6 +45,10 @@ def describe_clusters(dataframe):
     print_feature('Normalized cluster mean')
     print(gb.mean()/gb.mean().max())
 
+    print_feature('Cluster sum of variables')
+    cluster_sum = gb.sum()
+    print(cluster_sum)
+
 
 def plot_cluster_analysis(dataframe, error, title):
     """Plot cluster analysis on the same figure."""
