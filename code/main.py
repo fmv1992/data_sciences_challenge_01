@@ -82,6 +82,9 @@ def main():
     # Uniformize the data for clustering.
     df_clust_scaled = clustering.preprocess_data(df_clust)
 
+    # Generate a 120 silhouette analysis plot.
+    clustering.create_120_silh_plot(df_clust_scaled)
+
     # Select the number of clusters.
     all_cluster_labels = clustering.get_n_clusters(df_clust_scaled)
     # After carefull consideration I have decided that the adequate number of

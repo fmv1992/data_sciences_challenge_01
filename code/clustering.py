@@ -114,3 +114,51 @@ def get_n_clusters(dataframe, max_clusters=10):
         dpi=300)
 
     return cluster_labels_dict
+
+
+def create_120_silh_plot(dataframe):
+    """Return the adequate number of clusters for the dataset.
+
+    Return the adequate number of clusters for the dataset using the
+    'silhouette method'.
+
+    """
+    cluster_list = tuple(range(2, 120))
+    sil_avg_list = []
+    sil_std_list = []
+    cluster_labels_dict = dict()
+
+    for n in cluster_list:
+        # Create the cluster.
+        cluster = KMeans(n_clusters=n,
+                        random_state=control.RANDOM_SEED,
+                        n_jobs=1)
+        cluster_labels = cluster.fit_predict(dataframe)
+        cluster_labels_dict[n] = cluster_labels
+
+        # Store average silhouette score.
+        sil_avg = silhouette_score(dataframe, cluster_labels,
+                                   random_state=control.RANDOM_SEED)
+        sil_avg_list.append(sil_avg)
+
+        sil_ind = silhouette_samples(dataframe, cluster_labels)
+
+        # Store standard deviation of silhouettes score.
+        sil_std = np.std(sil_ind)
+        sil_std_list.append(sil_std)
+
+    # Plot the silhouette.
+    fig, ax = plt.subplots()
+    plt.errorbar(cluster_list, sil_avg_list, yerr=sil_std_list)
+    ax = fig.get_axes()[0]
+    ax.set_xlabel('Number of clusters')
+    ax.set_ylabel('Average value for silhouette')
+    ax.set_xticks(cluster_list[::10])
+    ax.set_ylim(-1, 1)
+    fig.savefig(
+        os.path.join(
+            control.CLUSTERING_PATH,
+            'silhouette_120.png'),
+        dpi=300)
+
+    return cluster_labels_dict
