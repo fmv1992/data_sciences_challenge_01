@@ -51,42 +51,36 @@ As one can see, this seemingly unimportant differences may yield different
 interpretations later on the data analysis and render some conclusions useless
 or even worse: wrong.
 
-~~~~~
-* XXX TODO: include total income/total value in dicusssion. XXX
-~~~~~
-
 # Approach
 
 As stated in the challenge description my work should:
 
 1. **Group users finding well defined groups with common characteristics.**
-    * In order to do that I have clustered the data set using the K-Means
+    * In order to do that I have clustered the data set using the *K-Means*
       clustering algorithm.
 
 1. **Justify the chosen clustering algorithm.**
-    * This algorithm is one of the most commonly used algorithm in Data
+    * This algorithm is one of the most *commonly used* algorithm in Data
       Sciences. As such one can easily find support, implementations,
-      discussions and suggestions on various references. **Such vast amount of
-      information is not something to be neglected.**  
-      The algorithm also allows the specification of the number of clusters to
-      be found.  This is seen as drawback according to some sources. Yet
-      I think that it can be overcome with successively running the algorithm
+      discussions and suggestions on various references. Such vast amount of
+      information is not something to be neglected.  
+      The algorithm also *allows the specification of the number of clusters*
+      to be found.  This is seen as drawback according to some sources. Yet I
+      think that it can be overcome with successively running the algorithm
       with a different cluster number. Specifying the number of clusters also
       impedes the algorithm to come up with a number of clusters which may be
       uninterpretable (too few, e. g. 2 or too many 10+).  
-      The algorithm tends to yield clusters with similar size. This may be
+      The algorithm tends to yield *clusters with similar size*. This may be
       a desired characteristic in a business setting for example, where
       investment of resources (time and capital) may be applied to a cluster of
       clients.  In such cases one does not want to invest those in a cluster
       just to find out that it aggregates to just a few individuals of their
       clientele.  
-      XXX TODO: discuss the random initialization of the algorithm; it may
-      yield really different clusters depending on its initialization.
 
 1. **Present metrics of perfomance for the chosen algorithm.**
-    * In this case the silhouette analysis was performed to assess the
+    * In this case the *silhouette analysis* was performed to assess the
       effectivenss of the clustering algorithm.  
-      Also the intra-group and inter-group standard deviation and means were
+      Also the *intra-group and inter-group standard deviation* and means were
       taken in consideration to interpret the results of this clustering
       algorithm.
 
@@ -106,7 +100,7 @@ As stated in the challenge description my work should:
 
 The received data needed preprocessing before applying te clustering method.
 That is because the K-Means clustering method is sensitive to variable scaling
-(more precisely to variance). Without scaling variables tend to have a
+(more precisely to variance). Without scaling, variables tend to have a
 variances of different orders of magnitude (standard deviation for the data set
 before preprocessing):
 
@@ -156,12 +150,12 @@ transformed to new binary characteristics (then scaled as commented above). To
 illustrate suppose that we begin only with `col1` and `col_a`, `col_b` and
 `col_c` are generated from them:
 
-col1 col_a col_b col_c
----- ----- ----- -----
-a    1     0     0
-b    0     1     0
-c    0     0     1
-a    1     0     0
+  col1     col_a     col_b     col_c
+ ------   -------   -------   -------
+  a        1         0         0
+  b        0         1         0
+  c        0         0         1
+  a        1         0         0
 
 This allow them to be included in the K-Means clustering algorithm.
 
@@ -231,6 +225,9 @@ For cluster interpretation two resources are available:
 1. [Tables](#stdout) output to stdout during program execution.
 1. [Plots](#all_plots).
 
+Please notice that all tables, plots and results are exhastively [detailed
+below](#all_output). They are repeated here for convenience.
+
 From a general standpoint clusters should have low intra-cluster variance and
 high inter-cluster variance for each variable.
 
@@ -238,7 +235,7 @@ high inter-cluster variance for each variable.
 
 *Distinctive features:*
 
-1. Has the most concentration of other marital status (that is, it is neither
+1. Has all individuals with 'other' marital status (that is, it is neither
    married nor single).
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_outro.png)
@@ -259,7 +256,7 @@ high inter-cluster variance for each variable.
 1. Has the most concentration of profile D ('perfil_d'). Also contains a lot of
    profile A individuals.
 1. Has the most concentration young people.
-1. Has the highest average value of silhouette ([see above](#all_silh)).
+1. Has the highest average value of silhouette ([see above](#silh6)).
 1. It is the cluster which aggregates most individuals (~1400).
 
 ### Cluster 2
@@ -267,8 +264,7 @@ high inter-cluster variance for each variable.
 *Distinctive features:*
 
 1. Has the highest averages for 'valor_02', 'valor_03' and 'valor_04'.
-   In respect to these 3 variables all the other groups have much lower
-   averages.
+   In respect to these 3 variables all the other groups have lower averages.
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_valor_02.png)
 
@@ -280,7 +276,7 @@ high inter-cluster variance for each variable.
 *Distinctive features:*
 
 1. It is the group with the highest proportion of married individuals
-   ('estado_civil_casado').
+   ('estado_civil_casado'). And it is solely comprised of married individuals.
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_estado_civil_casado.png)
 
@@ -295,13 +291,14 @@ high inter-cluster variance for each variable.
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_genero_f.png)
 
-1. XXX TODO
+1. Contains a fair distribution of different profiles ('perfil'), marital
+   status, and values ('valor')
 
 ### Cluster 5
 
 *Distinctive features:*
 
-1. Comprised solely of profile C:
+1. Comprised solely of profile C and it contains this group entirely:
 
 ![](../output/clustering/cluster_analysis_cluster_mean_of_variables_perfil_c.png)
 
@@ -309,33 +306,37 @@ high inter-cluster variance for each variable.
 variable in for this cluster).
 
 1. It is the smallest of all clusters: 245 individuals.
-1. XXX TODO
-
 
 # Summary {#summary}
 
 The clusterization was conducted properly and yielded significant results. This
 is evidenced by:
 
-* A satisfactory value of silhouette (XXX TODO comment further XXX)
-* Some very sharp separations, some of which are coupled and yield easily
-  interpretable results:
-    * a (coupled) XXX TODO
-    * b (coupled)
-    * c (single)
-    * d (single)
+* A satisfactory value of silhouette indicated good clustering (0.433)
 
 * A reasonable amount of clusters, facilitating the communication and
   interpretation of the results (one of the strenghts of the algorithm)
 
-A quick summary of each cluster's characteristics are:
-
-* Cluster 0: (XXX TODO one liner XXX)
-* Cluster 1: (XXX TODO one liner XXX)
-* Cluster 2: (XXX TODO one liner XXX)
-* Cluster 3: (XXX TODO one liner XXX)
-* Cluster 4: (XXX TODO one liner XXX)
-* Cluster 5: (XXX TODO one liner XXX)
+* Some very sharp separations, some of which are coupled and yield easily
+  interpretable results:
+    * Cluster 0
+        * it contains all individuals with 'other' marital status
+        * has the highest age mean
+        * (notice that the two variables are correlated)
+    * Cluster 1:
+        * all individuals are single males
+        * lowest age mean of all clusters
+        * it is the largest cluster
+    * Cluster 2:
+        * concentrates individuals with high value variables ('valor') from 2
+          to 4
+    * Cluster 3:
+        * group entirely comprised of male individuals
+        * group entirely comprised of married individuals
+    * Cluster 4:
+        * group entirely composed of female subjects
+    * Cluster 5:
+        * it contains all individuals with profile C ('perfil_c')
 
 # Additional information & Reproducibility
 
@@ -391,7 +392,21 @@ Python 3.6.1
 
 # Other remarks
 
-* Comment on the data set ; suggest improvements. XXX TODO
+Here are comments which would not fit elsewhere in the discussion of the
+document. Despite there are discussions on some of these topics I thought they
+would not fit well in the flow of the assignment.
+
+* As suggested in the introduction, a more precise definition of the data set
+  could improve the conclusions that could be drawn from it. When presenting a
+  data set for someone who is not acquainted with how it was generated extreme
+  care should be taken in order to communicate the variables, their origin and
+  their precise meaning carefully.
+
+* K-Means clusterization algorithm:
+    * Randomization of the initial cluster points may yield very different
+      clusters for the given data. This is considered a weakness. To ovecome
+      this the algorithm may use the *k-means++* initial seeding which improve
+      the initial assignment of the algorithm.
 
 # Next steps
 
@@ -402,7 +417,7 @@ Python 3.6.1
     * Comment on docstrings style
         * Comment on sphinx documentation
 
-# All output from python code
+# All output from python code {#all_ouput}
 
 ## All the images {#all_plots}
 
