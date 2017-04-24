@@ -9,10 +9,11 @@ This file is a high level description of what is the challenge, what is the
 data set, how was the approach and the results.
 
 ***The full results and discussion are in
-`./output/final_results/output.html`.***  
-In order to view the final results please open the file (do not load the github
-file as github does not render html files but rather it shows its code):
-`./output/final_results/output.html`.
+`./output/final_results/output.html`.***
+
+In order to view the final results please download and open the file in your
+web browser (do not load the github file as github does not render html files
+but rather it shows its html code): `./output/final_results/output.html`.
 
 # The challenge
 
@@ -20,7 +21,7 @@ The challenge is to interpret and group a given data set. Interpretation,
 coding quality, reproducibility and presentation of the results are some of the
 assessment criteria.
 
-See `./challenge_description/challenge_description.pdf` for description.
+See `./challenge_description/challenge_description.pdf` for a full description.
 
 # The data set
 
@@ -44,21 +45,36 @@ Methods and tools:
 
 # Results
 
-A partial result is available on `./output/partial_results/*`.
-
-A final result is available on `./output/final_results/output.html`.
+The final result is available on `./output/final_results/output.html`.
 
 The results are crafted using pandoc. Thus they are available on a couple of
-different formats.
-
-```
-pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
---css=$(cygpath -w ~/.pandoc/css/github.css ) --columns 79 --atx-headers
---data-dir=$(cygpath -w ~/.pandoc/templates/ )  --self-contained
---standalone  -s ./*md -o $(cygpath -w /tmp/output.html)
-```
+different formats for convenience.
 
 ***I recommend the html version which is the one I've been using to get
 feedback.***  
 Docx and pdf versions are provided for convenience. Their rendering fidelity to
 the final deliverable is not warranted though.
+
+# Reproducibility
+
+This project is easily reproducible. In order to do that one just needs to run:
+
+`zsh ./code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh`
+
+or alternatively:
+
+`zsh -c "$(wget https://raw.githubusercontent.com/fmv1992/data_sciences_challenge_01/develop/code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh -O -)"`
+
+## Requirements
+
+1. Be on an unix-like environment (have access to tools such as zsh, wget,
+   etc).
+1. zsh, renice, python3 virtual environment, pip, git.
+
+The script will:
+
+1. **Clean the `/tmp/virtual_env` path.**
+1. Setup a virtual environment.
+1. Install dependencies using pip.
+1. Clone this project.
+1. Execute the project. If sucessfull the last message will be: `Done! Sucess!`
