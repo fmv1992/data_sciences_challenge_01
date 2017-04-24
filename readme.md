@@ -69,6 +69,16 @@ This project is easily reproducible. In order to do that one just needs to run:
 
 `zsh ./code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh`
 
+or alternatively:
+
+`zsh -c "$(wget https://raw.githubusercontent.com/fmv1992/data_sciences_challenge_01/develop/code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh -O -)"`
+
+## Requirements
+
+1. Be on an unix-like environment (have access to tools such as zsh, wget,
+   etc).
+1. zsh, renice, python3 virtual environment, pip, git.
+
 The script will:
 
 1. **Clean the `/tmp/virtual_env` path.**

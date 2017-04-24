@@ -3,6 +3,10 @@
 # Set script to stop on error.
 set -e
 
+# Check for installed programs.
+echo "Checking for installed programs:"
+which renice virtualenv python3 pip3 git
+
 # Set low priority.
 renice -n 19 $$
 
