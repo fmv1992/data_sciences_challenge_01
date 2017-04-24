@@ -47,7 +47,7 @@ for package in $(echo $packages);
 do
     echo "Installing $package..."
     # Ensure a fresh install.
-    pip3 --no-cache-dir install -U --force-reinstall  $package
+    pip3 --no-cache-dir install --upgrade $package
 done
 
 # Clone the project.
