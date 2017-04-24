@@ -62,3 +62,15 @@ pandoc  --dpi 300 --from markdown+compact_definition_lists+example_lists
 feedback.***  
 Docx and pdf versions are provided for convenience. Their rendering fidelity to
 the final deliverable is not warranted though.
+
+# Reproducibility
+
+This project is easily reproducible. In order to do that one just needs to run:
+`zsh ./code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh`.
+The script will:
+
+1. **Clean the `/tmp/virtual_env` path.**
+1. Setup a virtual environment.
+1. Install dependencies using pip.
+1. Clone this project.
+1. Execute the project. If sucessfull the last message will be: `Done! Sucess!`

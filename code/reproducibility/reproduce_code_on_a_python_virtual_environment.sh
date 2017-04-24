@@ -54,7 +54,6 @@ done
 git clone --depth=1 -b develop https://github.com/fmv1992/data_sciences_challenge_01
 
 # Create a matplotlibrc file
-pip3 install matplotlib
 export script_matplotlibrc="$virtualenvpath/matplotlibrc"
 export MPLBACKEND=$(python3 ./data_sciences_challenge_01/code/reproducibility/get_matplotlib_backend.py)
 
