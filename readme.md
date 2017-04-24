@@ -66,7 +66,9 @@ the final deliverable is not warranted though.
 # Reproducibility
 
 This project is easily reproducible. In order to do that one just needs to run:
-`zsh ./code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh`.
+
+`zsh ./code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh`
+
 The script will:
 
 1. **Clean the `/tmp/virtual_env` path.**
