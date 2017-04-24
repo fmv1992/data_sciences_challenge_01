@@ -45,9 +45,7 @@ Methods and tools:
 
 # Results
 
-A partial result is available on `./output/partial_results/*`.
-
-A final result is available on `./output/final_results/output.html`.
+The final result is available on `./output/final_results/output.html`.
 
 The results are crafted using pandoc. Thus they are available on a couple of
 different formats for convenience.
