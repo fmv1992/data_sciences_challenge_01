@@ -63,9 +63,9 @@ This project is easily reproducible. In order to do that one just needs to run:
 
 or alternatively:
 
-`zsh -c "$(wget https://raw.githubusercontent.com/fmv1992/data_sciences_challenge_01/develop/code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh -O -)"`
+`zsh -c "$(wget https://raw.githubusercontent.com/fmv1992/data_sciences_challenge_01/master/code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh -O -)"`
 
-## Requirements
+## Requirements for running the automatic script
 
 1. Be on an unix-like environment (have access to tools such as zsh, wget,
    etc).
