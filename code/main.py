@@ -92,6 +92,8 @@ def main():
     df_clust_scaled = clustering.preprocess_data(df_clust)
 
     # Generate a 120 silhouette analysis plot.
+    print('Warning: will run silhouette plot for all numbers in range 2-120 '
+          'KMeans clusters (this may take ~10 minutes)...')
     clustering.create_120_silh_plot(df_clust_scaled)
 
     # Select the number of clusters.
