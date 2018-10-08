@@ -1,3 +1,5 @@
+![Build status](https://travis-ci.org/fmv1992/data_sciences_challenge_01.svg?branch=dev)
+
 # Easynvest Code challenge
 
 The publishing of the challenge and results were authorized by Easynvest

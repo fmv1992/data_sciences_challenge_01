@@ -1,0 +1,18 @@
+language: python
+env:
+    global:
+        - DISPLAY=:0.0
+        - MPLBACKEND=AGG
+branches:
+  only:
+    - dev
+python:
+    - "3.5"
+    - "3.6"
+before_install:
+    - sudo apt-get update
+    - sudo apt-get install zsh
+install:
+    - pip3 install -r ./requirements.txt
+script:
+    - travis_wait 90 zsh -c "$(wget https://raw.githubusercontent.com/fmv1992/data_sciences_challenge_01/dev/code/reproducibility/reproduce_code_on_a_python_virtual_environment.sh -O -)"

@@ -56,11 +56,15 @@ do
 done
 
 # Clone the project.
-git clone --depth=1 -b develop https://github.com/fmv1992/data_sciences_challenge_01
+git clone --depth=1 -b dev https://github.com/fmv1992/data_sciences_challenge_01
 
 # Create a matplotlibrc file
 export script_matplotlibrc="$virtualenvpath/matplotlibrc"
-export MPLBACKEND=$(python3 ./data_sciences_challenge_01/code/reproducibility/get_matplotlib_backend.py)
+if [ "$TRAVIS"  = 'true' ]; then
+    export MPLBACKEND=AGG
+else
+    export MPLBACKEND=$(python3 ./data_sciences_challenge_01/code/reproducibility/get_matplotlib_backend.py)
+fi
 
 # Moment of truth: run the challenge.
 cd ./data_sciences_challenge_01/code/
@@ -69,3 +73,4 @@ cd $virtualenvpath
 
 # Done! Sucess!
 echo "Done! Sucess!"
+exit 0
